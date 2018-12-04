@@ -1,7 +1,9 @@
 package pl.marcinkulwicki.myfirstapplication;
 
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.support.design.widget.Snackbar;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -35,6 +37,20 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        ActionBar ab = getSupportActionBar();
+        try{
+            ab.setLogo(R.drawable.android);
+            ab.setDisplayUseLogoEnabled(true);
+            ab.setDisplayShowHomeEnabled(true);
+            ab.setTitle("Helo i use ActionBar");
+
+        }catch (NullPointerException e){
+            System.out.println(e.getMessage());
+            System.out.println("Cant change logo ActionBar or SetTitle in MainActivity");
+        }
+
+
+
         mClickMeButton = findViewById(R.id.clickMeButton);
         mTextView = findViewById(R.id.textView);
         mDynamicList = findViewById(R.id.dynamicList);
@@ -43,6 +59,10 @@ public class MainActivity extends AppCompatActivity {
         mDynamicList.setAdapter(customAdapter);
 
 
+
+        if(getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
+            mDynamicList.setVisibility(View.INVISIBLE);
+        }
 
         mTextView.setText("");
         mClickMeButton.setOnClickListener(new View.OnClickListener() {
