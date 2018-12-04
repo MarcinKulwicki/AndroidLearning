@@ -17,6 +17,8 @@ import android.widget.TextView;
 
 import java.util.Random;
 
+import pl.marcinkulwicki.myfirstapplication.services.FirstService;
+
 
 public class MainActivity extends AppCompatActivity {
 
@@ -31,6 +33,7 @@ public class MainActivity extends AppCompatActivity {
     private int[] IMAGE = {R.drawable.photo_one, R.drawable.photo_two, R.drawable.photo_tree,
             R.drawable.photo_four, R.drawable.photo_five, R.drawable.photo_six, R.drawable.photo_seven,
             R.drawable.photo_eight, R.drawable.photo_nine, R.drawable.photo_ten};
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,7 +51,6 @@ public class MainActivity extends AppCompatActivity {
             System.out.println(e.getMessage());
             System.out.println("Cant change logo ActionBar or SetTitle in MainActivity");
         }
-
 
 
         mClickMeButton = findViewById(R.id.clickMeButton);
@@ -94,15 +96,21 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @Override
+    protected void onPause() {
+        mTextView.append("Pause");
+        super.onPause();
+    }
+    @Override
     protected void onStop() {
         super.onStop();
 
         mTextView.append("Stop");
     }
-    @Override
-    protected void onPause() {
-        mTextView.append("Pause");
-        super.onPause();
+
+
+    //Funkcja wywolywana na onClick button Start, uruchamia Servis
+    public void start(View view) {
+        startService(new Intent(getBaseContext(), FirstService.class));
     }
 
     class CustomAdapter extends BaseAdapter {
