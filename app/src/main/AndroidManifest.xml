@@ -19,6 +19,16 @@
             </intent-filter>
         </activity>
         <activity android:name=".Wynik"></activity>
+        <activity android:name=".ExampleIntent"></activity>
+        <activity android:name=".IntentActivity"></activity>
+        <activity android:name=".IntentResponse"></activity>
+
+        <receiver android:name=".Receiver.MyReceiver">
+            <intent-filter>
+                <action android:name="pl.marcinkulwicki.myfirstapplication.Reciever.NEW_MSG" />
+            </intent-filter>
+        </receiver>
     </application>
 
+    <uses-permission android:name="android.permission.CALL_PHONE" />
 </manifest>

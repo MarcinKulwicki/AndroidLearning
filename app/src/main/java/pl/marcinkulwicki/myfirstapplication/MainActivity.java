@@ -25,9 +25,10 @@ public class MainActivity extends AppCompatActivity {
     private Button mClickMeButton;
     private TextView mTextView;
     private ListView mDynamicList;
+    private Button mButtonIntent;
 
 
-    private String[] NAME = {"ANDZEJ", "JANUSZ", "PONCJUSZ", "ADAM", "KARYNA", "ALICJA","ANIA","ANASTAZJA", "TOMEK", "OLA"};
+    private String[] NAME = {"ANDZEJ", "JANUSZ", "PONCJUSZ", "ADAM", "KARYNA", "ALICJA", "ANIA", "ANASTAZJA", "TOMEK", "OLA"};
     private String[] DESCRIPTION = {"Maszynista", "Technik Informatyk", "Nauczyciel", "Oportunista", "Niski",
             "Kierowca Tira i Busa", "Programista", "Architekt AutoCAD", "Rowerzysta", "Szybki i Wysoki"};
     private int[] IMAGE = {R.drawable.photo_one, R.drawable.photo_two, R.drawable.photo_tree,
@@ -41,13 +42,13 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         ActionBar ab = getSupportActionBar();
-        try{
+        try {
             ab.setLogo(R.drawable.android);
             ab.setDisplayUseLogoEnabled(true);
             ab.setDisplayShowHomeEnabled(true);
             ab.setTitle("Helo i use ActionBar");
 
-        }catch (NullPointerException e){
+        } catch (NullPointerException e) {
             System.out.println(e.getMessage());
             System.out.println("Cant change logo ActionBar or SetTitle in MainActivity");
         }
@@ -61,8 +62,7 @@ public class MainActivity extends AppCompatActivity {
         mDynamicList.setAdapter(customAdapter);
 
 
-
-        if(getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
+        if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
             mDynamicList.setVisibility(View.INVISIBLE);
         }
 
@@ -75,7 +75,7 @@ public class MainActivity extends AppCompatActivity {
                 int i = rand.nextInt();
 
                 Snackbar.make(v, i + "", Snackbar.LENGTH_LONG).show();
-                mTextView.setText(i+"");
+                mTextView.setText(i + "");
 
                 Intent intent = new Intent(MainActivity.this, Wynik.class);
                 intent.putExtra("wynik", i);
@@ -88,10 +88,18 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 mTextView.setText(
-                        ((TextView)view.findViewById(R.id.titleList)).getText() + " - " +
+                        ((TextView) view.findViewById(R.id.titleList)).getText() + " - " +
                                 ((TextView) view.findViewById(R.id.descriptionList)).getText()
                 );
             }
+        });
+
+
+        ((Button) findViewById(R.id.buttonIntent)).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getBaseContext(), ExampleIntent.class));
+                }
         });
     }
 
@@ -100,6 +108,7 @@ public class MainActivity extends AppCompatActivity {
         mTextView.append("Pause");
         super.onPause();
     }
+
     @Override
     protected void onStop() {
         super.onStop();

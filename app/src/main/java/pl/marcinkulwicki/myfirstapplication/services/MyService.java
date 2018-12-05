@@ -46,7 +46,7 @@ public class MyService extends Service {
 
         clearTimerSchedule();
         initTask();
-        timer.scheduleAtFixedRate(timerTask, 4 * 1000, 4 * 1000);
+        timer.scheduleAtFixedRate(timerTask, 4 * 1000,  4 * 1000);
         showToast("Your service has been started");
 
         return super.onStartCommand(intent, flags, startId);
